@@ -1,0 +1,378 @@
+(define level [level] '())
+(define level-width  [number of slots per side] 5)
+(define m  [max coordinate] (- level-width 1))
+(define level-length [number of slots] (* level-width level-width))
+(define level-current-number [current level number] nil)
+
+(define coordinates-to-index [kkk] '(x [x] y [y]) (fn (x y)
+    (+ x (* y level-width))))
+
+(define index-to-x [kkk] '(index [index]) (fn (index)
+    (mod index level-width)))
+
+(define index-to-y [kkk] '(index [index]) (fn (index)
+    (/ index level-width)))
+
+(define new-anim [new animation] '(name [name] type [type] x [x] y [y]) (fn (name type x y)
+    (animation-entity-new name type '((- (* 32 x) 80) (- (* 32 y) 80) 0))
+))
+
+(define make-slot [make slot of the given type] '(index [index] type [type]) (fn (index type)
+    (define x [x] (index-to-x index))
+    (define y [y] (to-integer (index-to-y index)))
+    (define name [name] (string-format [{}{}] x y))
+
+    (new-anim name type x y)
+
+    (hash-map
+         'id   name
+         'x    x
+         'y    y
+         'type type)))
+
+(define slot-toggle-at [-] '(x [x] y [y]) (fn (x y)
+    (slot-toggle (level-get-slot x y))
+))
+
+(define slot-toggle [-] '(slot [slot]) (fn (slot)
+    (define id   [id]   (find slot 'id))
+    (define type [type] (find slot 'type))
+    (define x    [type] (find slot 'x))
+    (define y    [type] (find slot 'y))
+
+    (if (== type [slot-off])
+        (do
+            (= slot 'type [slot-on])
+            (animation-entity-remove id)
+            (new-anim id [slot-on] x y)
+            (return nil)))
+
+    (if (== type [slot-on])
+        (do
+            (= slot 'type [slot-off])
+            (animation-entity-remove id)
+            (new-anim id [slot-off] x y)
+            (return nil)))
+
+    (if (== type [slot-covered-on])
+        (do
+            (= slot 'type [slot-covered-off])
+            (animation-entity-remove id)
+            (new-anim id [slot-covered-off] x y)
+            (return nil)))
+
+    (if (== type [slot-covered-off])
+        (do
+            (= slot 'type [slot-covered-on])
+            (animation-entity-remove id)
+            (new-anim id [slot-covered-on] x y)
+            (return nil)))
+
+    (if (== type [lock-full-opened])
+        (do
+            (= slot 'type [lock-full-closed])
+            (animation-entity-remove id)
+            (new-anim id [lock-full-closed] x y)
+            (return nil)))
+
+    (if (== type [lock-half-closed])
+        (do
+            (= slot 'type [lock-full-closed])
+            (animation-entity-remove id)
+            (new-anim id [lock-full-closed] x y)
+            (return nil)))
+
+    (if (== type [lock-half-opened])
+        (do
+            (= slot 'type [lock-full-opened])
+            (animation-entity-remove id)
+            (new-anim id [lock-full-opened] x y)
+            (return nil)))
+
+    (if (== type [lock-full-closed])
+        (do
+            (= slot 'type [lock-half-opened])
+            (animation-entity-remove id)
+            (new-anim id [lock-half-opened] x y)
+            (return nil)))
+))
+
+(define slot-toggle-neighbors [-] '(slot [slot]) (fn (slot)
+    (define x    [type] (find slot 'x))
+    (define y    [type] (find slot 'y))
+
+    ; Corners
+    (if (and (== x 0) (== y 0)) (do (slot-toggle-at (+ x 1) y) (slot-toggle-at x (+ y 1)) (return nil)))
+    (if (and (== x m) (== y 0)) (do (slot-toggle-at (- x 1) y) (slot-toggle-at x (+ y 1)) (return nil)))
+    (if (and (== x 0) (== y m)) (do (slot-toggle-at (+ x 1) y) (slot-toggle-at x (- y 1)) (return nil)))
+    (if (and (== x m) (== y m)) (do (slot-toggle-at (- x 1) y) (slot-toggle-at x (- y 1)) (return nil)))
+
+    ; Left side
+    (if (== x 0) (do (slot-toggle-at (+ x 1) y) (slot-toggle-at x (- y 1)) (slot-toggle-at x (+ y 1)) (return nil)))
+
+    ; Right side
+    (if (== x m) (do (slot-toggle-at (- x 1) y) (slot-toggle-at x (- y 1)) (slot-toggle-at x (+ y 1)) (return nil)))
+
+    ; Top side
+    (if (== y 0) (do (slot-toggle-at x (+ y 1)) (slot-toggle-at (- x 1) y) (slot-toggle-at (+ x 1) y) (return nil)))
+
+    ; Bottom side
+    (if (== y m) (do (slot-toggle-at x (- y 1)) (slot-toggle-at (- x 1) y) (slot-toggle-at (+ x 1) y) (return nil)))
+
+    ; Somewhere "middle"; not corners and not borders
+    (slot-toggle-at x (- y 1))
+    (slot-toggle-at x (+ y 1))
+    (slot-toggle-at (+ x 1) y)
+    (slot-toggle-at (- x 1) y)
+))
+
+(define slot-is-passed [is this slot in a state allowing level pass] '(slot [slot]) (fn (slot)
+    (define type [type] (find slot 'type))
+
+    (if (== type [slot-off])         (return true ))
+    (if (== type [slot-covered-off]) (return true ))
+    (if (== type [lock-full-opened]) (return true ))
+    (if (== type [slot-missing])     (return true ))
+
+    (return false)
+))
+
+(define slot-on-mouse [slot on mouse] '(slot [slot] x [x] y [y] ox [ox] oy [oy]) (fn (slot x y ox oy)
+
+    (define id   [id]   (find slot 'id))
+
+    (define mx1 [mx1] (+ ox (animation-entity-get-x id)))
+    (define mx2 [mx2] (+ mx1 32))
+
+    (define my1 [my1] (+ oy (animation-entity-get-y id)))
+    (define my2 [my2] (+ my1 32))
+
+    ; TODO XXX make if to return errors it encounters
+    (if (< x mx1) (return nil))
+    (if (> x mx2) (return nil))
+
+    (if (< y my1) (return nil))
+    (if (> y my2) (return nil))
+
+    (define type [type] (find slot 'type))
+
+    (if (== type [slot-off])
+        (do
+            (slot-toggle slot)
+            (slot-toggle-neighbors slot)
+            (return nil)))
+
+    (if (== type [slot-on])
+        (do
+            (slot-toggle slot)
+            (slot-toggle-neighbors slot)
+            (return nil)))
+
+    (if (== type [slot-covered-on])
+        (do
+            (return nil)))
+
+    (if (== type [slot-covered-off])
+        (do
+            (return nil)))
+
+    (if (== type [lock-full-opened])
+        (do
+            (slot-toggle slot)
+            (slot-toggle-neighbors slot)
+            (return nil)))
+
+    (if (== type [lock-half-closed])
+        (do
+            (slot-toggle slot)
+            (slot-toggle-neighbors slot)
+            (return nil)))
+
+    (if (== type [lock-half-opened])
+        (do
+            (slot-toggle slot)
+            (slot-toggle-neighbors slot)
+            (return nil)))
+
+    (if (== type [lock-full-closed])
+        (do
+            (slot-toggle slot)
+            (slot-toggle-neighbors slot)
+            (return nil)))
+))
+
+(define level-reset-to [clear level to the given level] '(input [level as vector of strings]) (fn (input)
+    (animation-entity-remove-all)
+    (= level '())
+    (> (len input) level-length (abort [level input is too long!]))
+    (if (< (len input) level-length) (for i from (len input) to (- level-length 1) (+= input [slot-off])))
+    (for i from 0 to (- level-length 1) (+= level (make-slot i (nth i input))))
+    ))
+
+(define level-set-slot [level-set-slot] '(x [x] y [y] type [type]) (fn (x y type)
+    (= (nth (coordinates-to-index x y) level) 'type type)))
+
+(define level-get-slot [level-get-slot] '(x [x] y [y]) (fn (x y)
+    (nth (coordinates-to-index x y) level)))
+
+(define level-1 [level-1] '() (fn ()
+    (level-reset-to '(
+        [slot-on]  [slot-on]  [slot-off] [slot-off] [slot-off]
+        [slot-on]))
+    (= level-current-number 1)))
+
+(define level-2 [level-2] '() (fn ()
+    (level-reset-to '(
+        [slot-off]  [slot-off]  [slot-off] [slot-off] [slot-off]
+        [slot-off]  [slot-off]  [slot-off] [slot-off] [slot-off]
+        [slot-off]  [slot-off]  [lock-full-closed]))
+    (= level-current-number 2)))
+
+(define level-3 [level-3] '() (fn ()
+    (level-reset-to '(
+        [slot-missing] [slot-off] [slot-off] [slot-off] [slot-missing]
+        [slot-off] [slot-off] [slot-off] [slot-off] [slot-off]
+        [slot-off] [slot-off] [slot-covered-on] [slot-off] [slot-off]
+        [slot-off] [slot-off] [slot-off] [slot-off] [slot-off]
+        [slot-missing] [slot-off] [slot-off] [slot-off] [slot-missing]
+    ))
+    (= level-current-number 3)))
+
+(define level-4 [level-4] '() (fn ()
+    (level-reset-to '(
+        [slot-off] [slot-off] [slot-off] [slot-off] [slot-off]
+        [slot-off] [slot-off] [slot-off] [slot-off] [slot-off]
+        [slot-off] [slot-off] [slot-on]
+    ))
+    (= level-current-number 4)))
+
+(define level-5 [level-5] '() (fn ()
+    (level-reset-to '([slot-on]))
+    (= level-current-number 5)))
+
+(define level-restart [restart level] '() (fn ()
+    ; implement 'select' and use it here. these if's
+    ; without else will not work without the temp variable
+    (define lnum [level number before change] level-current-number)
+
+    (if (== 1 lnum) (level-1))
+    (if (== 2 lnum) (level-2))
+    (if (== 3 lnum) (level-3))
+    (if (== 4 lnum) (level-4))
+    (if (== 5 lnum) (level-5))
+
+    (shake)))
+
+(define level-next [next level] '() (fn ()
+    ; implement 'select' and use it here. these if's
+    ; without else will not work without the temp variable
+    (define lnum [level number before change] level-current-number)
+
+    (if (== 1 lnum) (level-2))
+    (if (== 2 lnum) (level-3))
+    (if (== 3 lnum) (level-4))
+    (if (== 4 lnum) (level-5))
+    (if (== 5 lnum) (level-1))
+
+    ))
+
+(define current-state [current-state] [game])
+
+(define printlevel [printlevel] false)
+
+(define check-possible-level-pass [-] '() (fn ()
+    (for i in level (if (== false (slot-is-passed i)) (return nil)))
+
+    ; Level is passed
+    (= current-state [tweenOut])
+    (tween-level-out)
+))
+
+(define on-mouse-button-down [----] '(x [x] y [y] ox [ox] oy [oy]) (fn (x y ox oy)
+    (for i in level (slot-on-mouse i x y ox oy))
+    (check-possible-level-pass)
+nil))
+
+(define state-update-game [state-update]
+                     '(dt [delta time]
+                       input   [string 'mouse-button-down', 'restart' or 'action 1' ]
+                       input-x [x coord of mouse]
+                       input-y [y coord of mouse]
+                       origo-x [origo x]
+                       origo-y [origo y])
+                     (fn (dt input input-x input-y origo-x origo-y)
+
+    (if (== input [restart])           (do (= input []) (level-restart)))
+    (if (== input [action 1])          (do (= input []) (= printlevel (not printlevel))))
+    (if (== input [down]) (do (= input []) (on-mouse-button-down input-x input-y origo-x origo-y)))
+
+    true))
+
+(define state-update-tween-out [state-update]
+                     '(dt [delta time]
+                       input   [string 'mouse-button-down', 'restart' or 'action 1' ]
+                       input-x [x coord of mouse]
+                       input-y [y coord of mouse]
+                       origo-x [origo-x]
+                       origo-y [origo-y]
+                       )
+                     (fn (dt input input-x input-y origo-x origo-y)
+    true))
+
+(define state-update [state-update]
+                     '(dt [delta time]
+                       input   [string 'mouse-button-down', 'restart' or 'action 1' ]
+                       input-x [x coord of mouse]
+                       input-y [y coord of mouse]
+                       origo-x [origo-x]
+                       origo-y [origo-y]
+                       )
+                     (fn (dt input input-x input-y origo-x origo-y)
+
+    (define tmpState [tmpState] current-state)
+
+    (if (== [game]     tmpState) (state-update-game      dt input input-x input-y origo-x origo-y))
+    (if (== [tweenOut] tmpState) (state-update-tween-out dt input input-x input-y origo-x origo-y))
+
+    (if printlevel (level-print))
+
+    true))
+
+(define state-on-tween-out-done [---] '() (fn ()
+    ;(message-show 0)
+    (level-next)
+    ))
+
+(define state-on-tween-in-done [---] '() (fn ()
+
+    (= current-state [game])))
+
+; Game starts here
+(level-1)
+
+
+
+;;; Here are some helper functions for debugging purposes.
+;;; Can be removed later
+
+(define level-print-row [lll] '(y [y]) (fn (y)
+    (for x from 0 to (- level-width 1) (level-print-slot x y))
+    (println [])))
+
+(define level-print [lll] '() (fn ()
+    (println [-------------------------------------------------])
+    (for y from 0 to (- level-width 1) (level-print-row y))
+    (println [-------------------------------------------------])
+    ))
+
+(define level-print-slot [kk] '(x [x] y [y]) (fn (x y)
+    (define name [name] (find (level-get-slot x y) 'type))
+
+    (define str [str]
+        (string-format [{} ({},{})] name (find (level-get-slot x y) 'x) (find (level-get-slot x y) 'y)))
+
+    (print str)
+
+    (define spaces [ll] (- 18 (len str)))
+    (for i from 0 to spaces (print [ ]))))
+
