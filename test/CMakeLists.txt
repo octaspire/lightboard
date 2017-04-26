@@ -17,6 +17,6 @@ if(OCTASPIRE_lightboard_COVERAGE)
     set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} --coverage")
 endif(OCTASPIRE_lightboard_COVERAGE)
 
-target_link_libraries(octaspire-lightboard-test-runner octaspire_dern octaspire_core)
+target_link_libraries(octaspire-lightboard-test-runner octaspire-dern octaspire-core)
 
 add_test(octaspire-lightboard-test-runner octaspire-lightboard-test-runner)
