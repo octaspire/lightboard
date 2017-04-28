@@ -37,7 +37,6 @@ void octaspire_lightboard_game_render(
     octaspire_lightboard_game_t const * const self,
     SDL_Renderer * const renderer,
     octaspire_sdl2_texture_t const * const texture,
-    octaspire_sdl2_texture_t const * const textureMessages,
     int const origoX,
     int const origoY);
 
@@ -51,11 +50,6 @@ bool octaspire_lightboard_game_push_back_state(
 
 octaspire_lightboard_state_t *octaspire_lightboard_game_get_current_state(
     octaspire_lightboard_game_t * const self);
-
-bool octaspire_lightboard_game_show_message(
-    octaspire_lightboard_game_t * const self,
-    size_t const index);
-
 
 #ifdef __cplusplus
 }
