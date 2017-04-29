@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.12)
 
 set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MAJOR 0)
-set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR 5)
+set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR 6)
 set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_PATCH 0)
 
 set(OCTASPIRE_LIGHTBOARD_CONFIG_TEST_RES_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/resource/")
@@ -28,10 +28,6 @@ message("== Build type is ${CMAKE_BUILD_TYPE}")
 add_subdirectory(external/octaspire_dern)
 add_subdirectory(external/octaspire_easing)
 add_subdirectory(external/octaspire_sdl2_utils)
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/external/cmake")
-
-find_package(SDL2       REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIR})
 
