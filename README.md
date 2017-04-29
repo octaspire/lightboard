@@ -61,6 +61,5 @@ If you want to know more about Octaspire Dern, the language manual can be found 
 Homepage of Octaspire Lightboard can be found from here:
 [http://www.octaspire.com/lightboard](http://www.octaspire.com/lightboard)
 
-https://www.youtube.com/watch?v=
 [![Link to youtube video](https://img.youtube.com/vi/ENWtO7XnEyY/0.jpg)](https://www.youtube.com/watch?v=ENWtO7XnEyY)
 
