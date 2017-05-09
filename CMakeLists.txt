@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.12)
 project(octaspire-lightboard C)
 
 set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MAJOR 0)
-set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR 14)
+set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR 15)
 set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_PATCH 0)
 
 message("== Building ${PROJECT_NAME} ${OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MAJOR}.${OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR}.${OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_PATCH}")
@@ -51,8 +51,6 @@ if(NOT TARGET octaspire-sdl2-utils)
     message("-----------------------------------------------")
 endif(NOT TARGET octaspire-sdl2-utils)
 
-include_directories(${SDL2_INCLUDE_DIR})
-
 file(GLOB SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 file(GLOB HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/include/octaspire/lightboard/*.h")
 file(GLOB MANUAL6 "${CMAKE_CURRENT_SOURCE_DIR}/doc/man/man3/octaspire-dern.6")
@@ -67,7 +65,7 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/external/octaspire_easing/build
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/external/octaspire_sdl2_utils/include")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/external/octaspire_sdl2_utils/build/include")
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/include")
-
+include_directories(${SDL2_INCLUDE_DIR})
 
 add_executable(octaspire-xxd "${CMAKE_CURRENT_SOURCE_DIR}/etc/octaspire_xxd.c")
 set_property(TARGET octaspire-xxd PROPERTY C_STANDARD 99)
