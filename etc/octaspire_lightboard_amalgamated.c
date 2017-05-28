@@ -23,6 +23,26 @@ limitations under the License.
   Edit the separate .h and .c files in the source distribution and then
   let the script create this file agian with the modifications.
 
+*******************************************************************************
+
+    To compile this file:
+
+    Linux:
+    gcc -O3 -std=c99 -Wall -Wextra octaspire_lightboard_amalgamated.c \
+        `pkg-config --cflags --libs sdl2` -lm -o octaspire-lightboard
+
+    FreeBSD:
+    todo
+
+    NetBSD:
+    todo
+
+    Haiku:
+    todo
+
+    MINIX 3:
+    todo
+
 ******************************************************************************/
 #ifndef OCTASPIRE_LIGHTBOARD_AMALGAMATED_H
 #define OCTASPIRE_LIGHTBOARD_AMALGAMATED_H
@@ -65753,10 +65773,10 @@ size_t const octaspire_lightboard_texture_entities_len=196746;
 #define OCTASPIRE_LIGHTBOARD_CONFIG_H
 
 #define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MAJOR "0"
-#define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR "27"
+#define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR "28"
 #define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_PATCH "0"
 
-#define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_STR   "Octaspire Lightboard version 0.27.0"
+#define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_STR   "Octaspire Lightboard version 0.28.0"
 
 
 #define OCTASPIRE_LIGHTBOARD_CONFIG_MEMORY_ALLOCATOR_REGION_MIN_BLOCK_SIZE_IN_OCTETS 104858000
