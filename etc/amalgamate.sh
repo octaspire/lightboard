@@ -6,7 +6,7 @@ FILE="$1/octaspire_lightboard_amalgamated.c"
 rm -rf $FILE
 
 # Write license and the top-part of the include guards
-cat >> $FILE << EnDoFmEsSaGe
+cat >> $FILE << 'EnDoFmEsSaGe'
 /******************************************************************************
 Octaspire Lightboard - Puzzle game
 Copyright 2017 www.octaspire.com
@@ -31,6 +31,26 @@ limitations under the License.
 
   Edit the separate .h and .c files in the source distribution and then
   let the script create this file agian with the modifications.
+
+*******************************************************************************
+
+    To compile this file:
+
+    Linux:
+    gcc -O3 -std=c99 -Wall -Wextra octaspire_lightboard_amalgamated.c \
+        `pkg-config --cflags --libs sdl2` -lm -o octaspire-lightboard
+
+    FreeBSD:
+    todo
+
+    NetBSD:
+    todo
+
+    Haiku:
+    todo
+
+    MINIX 3:
+    todo
 
 ******************************************************************************/
 #ifndef OCTASPIRE_LIGHTBOARD_AMALGAMATED_H

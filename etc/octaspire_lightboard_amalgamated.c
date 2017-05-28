@@ -65753,10 +65753,10 @@ size_t const octaspire_lightboard_texture_entities_len=196746;
 #define OCTASPIRE_LIGHTBOARD_CONFIG_H
 
 #define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MAJOR "0"
-#define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR "26"
+#define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR "27"
 #define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_PATCH "0"
 
-#define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_STR   "Octaspire Lightboard version 0.26.0"
+#define OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_STR   "Octaspire Lightboard version 0.27.0"
 
 
 #define OCTASPIRE_LIGHTBOARD_CONFIG_MEMORY_ALLOCATOR_REGION_MIN_BLOCK_SIZE_IN_OCTETS 104858000
@@ -68462,7 +68462,7 @@ int main(int argc, char *argv[])
     octaspire_dern_value_t *resultVal =
         octaspire_dern_vm_read_from_buffer_and_eval_in_global_environment(
             vm,
-            octaspire_lightboard_animations,
+            (char const * const)octaspire_lightboard_animations,
             octaspire_lightboard_animations_len);
 
     if (resultVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
@@ -68476,7 +68476,12 @@ int main(int argc, char *argv[])
 
     octaspire_lightboard_game_push_back_state(
         game,
-        octaspire_lightboard_state_new(game, octaspire_lightboard_ini, octaspire_lightboard_ini_len, allocator, stdio));
+        octaspire_lightboard_state_new(
+            game,
+            (char const * const)octaspire_lightboard_ini,
+            octaspire_lightboard_ini_len,
+            allocator,
+            stdio));
 
     Uint64 timeNow   = SDL_GetPerformanceCounter();
     Uint64 timeLast  = 0;
