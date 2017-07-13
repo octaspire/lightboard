@@ -39,14 +39,14 @@ octaspire_dern_value_t *octaspire_lightboard_api_shake(
 
     size_t const stackLength = octaspire_dern_vm_get_stack_length(vm);
 
-    octaspire_helpers_verify(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
-    octaspire_helpers_verify(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
+    octaspire_helpers_verify_true(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
+    octaspire_helpers_verify_true(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
 
     size_t const numArgs = octaspire_dern_value_get_length(arguments);
 
     if (numArgs != 0)
     {
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Builtin 'shake' expects no arguments. %zu arguments were given.",
@@ -57,7 +57,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_shake(
 
     state->shakeCounter = 16;
 
-    octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+    octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
     return octaspire_dern_vm_get_value_true(vm);
 }
 
@@ -68,14 +68,14 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_get_x(
 {
     size_t const stackLength = octaspire_dern_vm_get_stack_length(vm);
 
-    octaspire_helpers_verify(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
-    octaspire_helpers_verify(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
+    octaspire_helpers_verify_true(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
+    octaspire_helpers_verify_true(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
 
     size_t const numArgs = octaspire_dern_value_get_length(arguments);
 
     if (numArgs != 1)
     {
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Builtin 'animation-entity-get-x' expects one argument. %zu arguments were given.",
@@ -86,7 +86,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_get_x(
 
     if (firstArg->typeTag != OCTASPIRE_DERN_VALUE_TAG_STRING)
     {
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Builtin 'animation-entity-get-x' expects one string argument. Type %s was given.",
@@ -95,7 +95,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_get_x(
 
     octaspire_lightboard_state_t *state = (octaspire_lightboard_state_t*)octaspire_dern_vm_get_user_data(vm);
 
-    octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+    octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
 
     octaspire_container_hash_map_element_t * element = octaspire_container_hash_map_get(
         state->animations,
@@ -119,14 +119,14 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_get_y(
 {
     size_t const stackLength = octaspire_dern_vm_get_stack_length(vm);
 
-    octaspire_helpers_verify(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
-    octaspire_helpers_verify(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
+    octaspire_helpers_verify_true(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
+    octaspire_helpers_verify_true(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
 
     size_t const numArgs = octaspire_dern_value_get_length(arguments);
 
     if (numArgs != 1)
     {
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Builtin 'animation-entity-get-y' expects one argument. %zu arguments were given.",
@@ -137,7 +137,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_get_y(
 
     if (firstArg->typeTag != OCTASPIRE_DERN_VALUE_TAG_STRING)
     {
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Builtin 'animation-entity-get-y' expects one string argument. Type %s was given.",
@@ -146,7 +146,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_get_y(
 
     octaspire_lightboard_state_t *state = (octaspire_lightboard_state_t*)octaspire_dern_vm_get_user_data(vm);
 
-    octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+    octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
 
     octaspire_container_hash_map_element_t *element = octaspire_container_hash_map_get(
         state->animations,
@@ -170,14 +170,14 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_new(
 {
     size_t const stackLength = octaspire_dern_vm_get_stack_length(vm);
 
-    octaspire_helpers_verify(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
-    octaspire_helpers_verify(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
+    octaspire_helpers_verify_true(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
+    octaspire_helpers_verify_true(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
 
     size_t const numArgs = octaspire_dern_value_get_length(arguments);
 
     if (numArgs != 3)
     {
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Builtin 'animation-entity-new' expects exactly three arguments. %zu arguments were given.",
@@ -198,11 +198,11 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_new(
 
         if (animNameVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
         {
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
             return animNameVal;
         }
 
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "First argument to builtin 'animation-entity-new' must be string value. "
@@ -224,11 +224,11 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_new(
 
         if (animTypeVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
         {
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
             return animTypeVal;
         }
 
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Second argument to builtin 'animation-entity-new' must be string value. "
@@ -250,11 +250,11 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_new(
 
         if (animPosVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
         {
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
             return animPosVal;
         }
 
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Third argument to builtin 'animation-entity-new' must be vector value. "
@@ -265,7 +265,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_new(
     if (octaspire_dern_value_as_vector_get_length(animPosVal) != 3)
     {
         octaspire_dern_vm_pop_value(vm, arguments);
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Third argument to builtin 'animation-entity-new' must be a vector with three values. "
@@ -284,12 +284,12 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_new(
     {
         octaspire_dern_value_t *tmpVal = octaspire_dern_vm_eval(vm, animPosXVal, environment);
 
-        octaspire_helpers_verify(tmpVal);
+        octaspire_helpers_verify_not_null(tmpVal);
 
         if (tmpVal->typeTag != OCTASPIRE_DERN_VALUE_TAG_INTEGER)
         {
             octaspire_dern_vm_pop_value(vm, arguments);
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
 
             if (tmpVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
             {
@@ -319,12 +319,12 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_new(
     {
         octaspire_dern_value_t *tmpVal = octaspire_dern_vm_eval(vm, animPosYVal, environment);
 
-        octaspire_helpers_verify(tmpVal);
+        octaspire_helpers_verify_not_null(tmpVal);
 
         if (tmpVal->typeTag != OCTASPIRE_DERN_VALUE_TAG_INTEGER)
         {
             octaspire_dern_vm_pop_value(vm, arguments);
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
 
             if (tmpVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
             {
@@ -354,12 +354,12 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_new(
     {
         octaspire_dern_value_t *tmpVal = octaspire_dern_vm_eval(vm, animPosZVal, environment);
 
-        octaspire_helpers_verify(tmpVal);
+        octaspire_helpers_verify_not_null(tmpVal);
 
         if (tmpVal->typeTag != OCTASPIRE_DERN_VALUE_TAG_INTEGER)
         {
             octaspire_dern_vm_pop_value(vm, arguments);
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
 
             if (tmpVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
             {
@@ -397,7 +397,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_new(
         abort();
     }
 
-    octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+    octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
     return octaspire_dern_vm_get_value_true(vm);
 }
 
@@ -408,14 +408,14 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_remove(
 {
     size_t const stackLength = octaspire_dern_vm_get_stack_length(vm);
 
-    octaspire_helpers_verify(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
-    octaspire_helpers_verify(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
+    octaspire_helpers_verify_true(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
+    octaspire_helpers_verify_true(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
 
     size_t const numArgs = octaspire_dern_value_get_length(arguments);
 
     if (numArgs != 1)
     {
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Builtin 'animation-entity-remove' expects exactly one argument. %zu arguments were given.",
@@ -439,11 +439,11 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_remove(
 
         if (animNameVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
         {
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
             return animNameVal;
         }
 
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "First argument to builtin 'animation-entity-remove' must be string value. "
@@ -461,7 +461,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_remove(
     }
 
     octaspire_dern_vm_pop_value(vm, arguments);
-    octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+    octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
     return octaspire_dern_vm_get_value_true(vm);
 }
 
@@ -474,14 +474,14 @@ octaspire_dern_value_t *octaspire_lightboard_api_tween_level_out(
 
     size_t const stackLength = octaspire_dern_vm_get_stack_length(vm);
 
-    octaspire_helpers_verify(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
-    octaspire_helpers_verify(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
+    octaspire_helpers_verify_true(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
+    octaspire_helpers_verify_true(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
 
     size_t const numArgs = octaspire_dern_value_get_length(arguments);
 
     if (numArgs != 0)
     {
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Builtin 'tween-level-out' expects exactly zero arguments. %zu arguments were given.",
@@ -495,7 +495,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_tween_level_out(
         abort();
     }
 
-    octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+    octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
     return octaspire_dern_vm_get_value_true(vm);
 }
 
@@ -506,14 +506,14 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_remove_all(
 {
     size_t const stackLength = octaspire_dern_vm_get_stack_length(vm);
 
-    octaspire_helpers_verify(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
-    octaspire_helpers_verify(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
+    octaspire_helpers_verify_true(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
+    octaspire_helpers_verify_true(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
 
     size_t const numArgs = octaspire_dern_value_get_length(arguments);
 
     if (numArgs != 0)
     {
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Builtin 'animation-entity-remove-all' expects exactly zero arguments. %zu arguments were given.",
@@ -530,7 +530,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_remove_all(
         abort();
     }
 
-    octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+    octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
     return octaspire_dern_vm_get_value_true(vm);
 }
 
@@ -541,14 +541,14 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_set_position(
 {
     size_t const stackLength = octaspire_dern_vm_get_stack_length(vm);
 
-    octaspire_helpers_verify(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
-    octaspire_helpers_verify(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
+    octaspire_helpers_verify_true(arguments->typeTag   == OCTASPIRE_DERN_VALUE_TAG_VECTOR);
+    octaspire_helpers_verify_true(environment->typeTag == OCTASPIRE_DERN_VALUE_TAG_ENVIRONMENT);
 
     size_t const numArgs = octaspire_dern_value_get_length(arguments);
 
     if (numArgs != 2)
     {
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Builtin 'animation-entity-set-position' expects exactly two arguments. %zu arguments were given.",
@@ -572,11 +572,11 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_set_position(
 
         if (animNameVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
         {
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
             return animNameVal;
         }
 
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "First argument to builtin 'animation-entity-set-position' must be string value. "
@@ -590,7 +590,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_set_position(
             arguments,
             1);
 
-    octaspire_helpers_verify(animPosVal);
+    octaspire_helpers_verify_not_null(animPosVal);
 
     if (animPosVal->typeTag != OCTASPIRE_DERN_VALUE_TAG_VECTOR)
     {
@@ -598,11 +598,11 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_set_position(
 
         if (animPosVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
         {
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
             return animPosVal;
         }
 
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Second argument to builtin 'animation-entity-set-position' must be vector value. "
@@ -613,7 +613,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_set_position(
     if (octaspire_dern_value_as_vector_get_length(animPosVal) != 3)
     {
         octaspire_dern_vm_pop_value(vm, arguments);
-        octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+        octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
         return octaspire_dern_vm_create_new_value_error_format(
             vm,
             "Second argument to builtin 'animation-entity-set-position' must be a vector with three values. "
@@ -632,12 +632,12 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_set_position(
     {
         octaspire_dern_value_t *tmpVal = octaspire_dern_vm_eval(vm, animPosXVal, environment);
 
-        octaspire_helpers_verify(tmpVal);
+        octaspire_helpers_verify_not_null(tmpVal);
 
         if (tmpVal->typeTag != OCTASPIRE_DERN_VALUE_TAG_INTEGER)
         {
             octaspire_dern_vm_pop_value(vm, arguments);
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
 
             if (tmpVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
             {
@@ -667,12 +667,12 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_set_position(
     {
         octaspire_dern_value_t *tmpVal = octaspire_dern_vm_eval(vm, animPosYVal, environment);
 
-        octaspire_helpers_verify(tmpVal);
+        octaspire_helpers_verify_not_null(tmpVal);
 
         if (tmpVal->typeTag != OCTASPIRE_DERN_VALUE_TAG_INTEGER)
         {
             octaspire_dern_vm_pop_value(vm, arguments);
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
 
             if (tmpVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
             {
@@ -705,12 +705,12 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_set_position(
     {
         octaspire_dern_value_t *tmpVal = octaspire_dern_vm_eval(vm, animPosZVal, environment);
 
-        octaspire_helpers_verify(tmpVal);
+        octaspire_helpers_verify_not_null(tmpVal);
 
         if (tmpVal->typeTag != OCTASPIRE_DERN_VALUE_TAG_INTEGER)
         {
             octaspire_dern_vm_pop_value(vm, arguments);
-            octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+            octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
 
             if (tmpVal->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
             {
@@ -747,7 +747,7 @@ octaspire_dern_value_t *octaspire_lightboard_api_animation_entity_set_position(
         abort();
     }
 
-    octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(vm));
+    octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(vm));
     return octaspire_dern_vm_get_value_true(vm);
 }
 
@@ -904,7 +904,7 @@ octaspire_lightboard_state_t *octaspire_lightboard_state_new(
         scriptBuffer,
         scriptBufferLengthInOctets);
 
-    octaspire_helpers_verify(value);
+    octaspire_helpers_verify_not_null(value);
 
     if (value->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
     {
@@ -1019,7 +1019,7 @@ void octaspire_lightboard_state_update(
             octaspire_container_hash_map_element_get_value(
                 octaspire_container_hash_map_get_at_index(self->animations, i));
 
-        octaspire_helpers_verify(animation);
+        octaspire_helpers_verify_not_null(animation);
 
         octaspire_sdl2_animation_update(animation, dt);
     }
@@ -1081,7 +1081,7 @@ void octaspire_lightboard_state_update(
     */
 
     octaspire_dern_value_t *callResult = octaspire_dern_vm_eval_in_global_environment(self->vm, updateCallVal);
-    octaspire_helpers_verify(callResult);
+    octaspire_helpers_verify_not_null(callResult);
 
     if (callResult->typeTag == OCTASPIRE_DERN_VALUE_TAG_ERROR)
     {
@@ -1098,7 +1098,7 @@ void octaspire_lightboard_state_update(
     }
 
     octaspire_dern_vm_pop_value(self->vm, updateCallVal);
-    octaspire_helpers_verify(stackLength == octaspire_dern_vm_get_stack_length(self->vm));
+    octaspire_helpers_verify_true(stackLength == octaspire_dern_vm_get_stack_length(self->vm));
 }
 
 bool octaspire_lightboard_state_tween_level_out(
@@ -1121,7 +1121,7 @@ void octaspire_lightboard_state_private_render_layer(
     int const origoX,
     int const origoY)
 {
-    octaspire_helpers_verify(layer < 4);
+    octaspire_helpers_verify_true(layer < 4);
 
     size_t const numAnims = octaspire_container_hash_map_get_number_of_elements(self->animations);
 
@@ -1131,7 +1131,7 @@ void octaspire_lightboard_state_private_render_layer(
             octaspire_container_hash_map_element_get_value(
                 octaspire_container_hash_map_get_at_index(self->animations, i));
 
-        octaspire_helpers_verify(animation);
+        octaspire_helpers_verify_not_null(animation);
 
         if (octaspire_sdl2_animation_get_z(animation) == (int)layer)
         {
@@ -1198,7 +1198,7 @@ bool octaspire_lightboard_state_add_named_animation_of_type_to_position(
     octaspire_sdl2_animation_t *animation =
         octaspire_lightboard_game_get_animation_copy(self->parent, type);
 
-    octaspire_helpers_verify(animation);
+    octaspire_helpers_verify_not_null(animation);
 
     octaspire_sdl2_animation_set_position(animation, x, y, z);
 
@@ -1237,14 +1237,14 @@ bool octaspire_lightboard_state_set_animation_position(
     {
         octaspire_container_utf8_string_release(key);
         key = 0;
-        octaspire_helpers_verify(false);
+        octaspire_helpers_verify_true(false);
         return false;
     }
 
     octaspire_sdl2_animation_t * const animation =
         octaspire_container_hash_map_element_get_value(element);
 
-    octaspire_helpers_verify(animation);
+    octaspire_helpers_verify_not_null(animation);
 
     octaspire_sdl2_animation_set_position(animation, x, y, z);
 
