@@ -206,14 +206,14 @@
     (= level '())
     (> (len input) level-length (abort [level input is too long!]))
     (if (< (len input) level-length) (for i from (len input) to (- level-length 1) (+= input [slot-off])))
-    (for i from 0 to (- level-length 1) (+= level (make-slot i (nth i input))))
+    (for i from 0 to (- level-length 1) (+= level (make-slot i (ln@ input i))))
     ))
 
 (define level-set-slot [level-set-slot] '(x [x] y [y] type [type]) (fn (x y type)
-    (= (nth (coordinates-to-index x y) level) 'type type)))
+    (= (ln@ level (coordinates-to-index x y)) 'type type)))
 
 (define level-get-slot [level-get-slot] '(x [x] y [y]) (fn (x y)
-    (nth (coordinates-to-index x y) level)))
+    (ln@ level (coordinates-to-index x y))))
 
 (define level-1 [level-1] '() (fn ()
     (level-reset-to '(
