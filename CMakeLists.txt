@@ -148,4 +148,4 @@ endif(NOT TARGET octaspire-lightboard-test-runner AND OCTASPIRE_LIGHTBOARD_UNIT_
 add_custom_target(
     book-lightboard
     COMMAND asciidoctor --backend=html5 "${CMAKE_CURRENT_SOURCE_DIR}/doc/book/Octaspire_Lightboard_Manual.adoc"
-    COMMAND asciidoctor-pdf -a source-highlighter=pygments "${CMAKE_CURRENT_SOURCE_DIR}/doc/book/Octaspire_LightBoard_Manual.adoc")
+    COMMAND asciidoctor-pdf -a source-highlighter=pygments "${CMAKE_CURRENT_SOURCE_DIR}/doc/book/Octaspire_Lightboard_Manual.adoc")
