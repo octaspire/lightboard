@@ -106,6 +106,37 @@ More information about Lightboard can be found from the homepage:\n\
 octaspire.com/lightboard and https://octaspire.io/lightboard\n" > "$PROJECT_PATH/etc/release/version-$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH/README"
     RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
 
+    echo "\nCopying amalgamation...\n--------------------------\n"
+    cp "$PROJECT_PATH/etc/octaspire_lightboard_amalgamated.c" "$PROJECT_PATH/etc/release/version-$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH/octaspire-lightboard-amalgamated.c"
+    RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
+
+    echo "\nCopying LICENSE file...\n--------------------------\n"
+    cp "$PROJECT_PATH/LICENSE" "$PROJECT_PATH/etc/release/version-$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH/LICENSE"
+    RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
+
+    echo "\nCopying book to the release directory...\n--------------------------\n"
+    cp "$PROJECT_PATH/doc/book/Octaspire_Lightboard_Manual.html" "$PROJECT_PATH/etc/release/version-$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH/documentation/"
+    RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
+    cp "$PROJECT_PATH/doc/book/Octaspire_Lightboard_Manual.pdf" "$PROJECT_PATH/etc/release/version-$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH/documentation/"
+    RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
+
+    echo "\nCopying build scripts to the release directory...\n--------------------------\n"
+    cp -r "$PROJECT_PATH/etc/how-to-build/" "$PROJECT_PATH/etc/release/version-$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH/"
+    RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
+
+    echo "\nCompressing release directory into tar.bz2...\n--------------------------\n"
+    cd "$PROJECT_PATH/etc/"
+    RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
+    tar --bzip2 -cf "release.tar.bz2" release
+    RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
+
+    echo "\nRemoving $PROJECT_PATH/release/ and creating it again with updates\n--------------------------\n"
+    rm -rf "$PROJECT_PATH/release"
+    RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
+    cp -r "$PROJECT_PATH/etc/release/version-$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH" "$PROJECT_PATH"
+    RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
+    mv "$PROJECT_PATH/version-$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH" "$PROJECT_PATH/release"
+    RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
 
     echo "\nRelease $NEW_MAJOR.$NEW_MINOR.$NEW_PATCH created."
 }
