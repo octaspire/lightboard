@@ -1,0 +1,63 @@
+Octaspire Lightboard Manual
+===========================
+:author: www.octaspire.com
+:lang: en
+:toc:
+:source-highlighter: pygments
+
+Documentation for Octaspire Lightboard puzzle game version 0.37.0
+
+== About
+
+++++
+<a href="https://travis-ci.org/octaspire/lightboard"><img src="https://travis-ci.org/octaspire/lightboard.svg?branch=master" alt="Build status" /></a>
+<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License badge" /></a>
+++++
+
+Octaspire Lightboard is a puzzle game written in *Octaspire Dern* programming language with
+some standard C99. It uses *Octaspire Core* and *SDL2* libraries. It should run on all
+platforms that have SDL2 available, even on slower hardware - it is developed
+from the start in Raspberry Pi 2.
+
+Lightboard uses
+http://semver.org[Semantic Versioning 2.0.0] version numbering scheme.
+As long as the MAJOR version number is zero anything can change at any time,
+even in backwards incompatible manner.
+
+== See Lightboard in action
+
+++++
+<iframe width="853" height="480" src="https://www.youtube.com/embed/IohkzbmQDoo" frameborder="0" allowfullscreen></iframe>
+++++
+
+
+
+== Building the amalgamated source release
+
+The amalgamated source release is the recommended way of using Lightboard, if you
+don't need to modify Maze itself. To use the amalgamated release, you will need
+only a C compiler, C standard library supporting C99 and the SDL2 library.
+
+=== Linux, Haiku and FreeBSD
+
+:source-highlighter: pygments
+:pygments-style: colorful
+:pygments-linenums-mode: inline
+[source,bash]
+----
+curl -O octaspire.com/lightboard/release.tar.bz2
+tar jxf release.tar.bz2
+cd release/*
+curl -O https://octaspire.github.io/lightboard/checksums
+sha512sum -c checksums
+sh how-to-build/YOUR_PLATFORM_NAME_HERE.XX
+----
+
+replace *YOUR_PLATFORM_NAME_HERE.XX* with *linux.sh*, *haiku.sh* or *FreeBSD.sh*.
+More scripts for different platforms will be added later.
+
+
+== Controls
+
+TODO
+
