@@ -144,3 +144,8 @@ if(NOT TARGET octaspire-lightboard-test-runner AND OCTASPIRE_LIGHTBOARD_UNIT_TES
     add_subdirectory(test)
 endif(NOT TARGET octaspire-lightboard-test-runner AND OCTASPIRE_LIGHTBOARD_UNIT_TEST)
 
+
+add_custom_target(
+    book-lightboard
+    COMMAND asciidoctor --backend=html5 "${CMAKE_CURRENT_SOURCE_DIR}/doc/book/Octaspire_Lightboard_Manual.adoc"
+    COMMAND asciidoctor-pdf -a source-highlighter=pygments "${CMAKE_CURRENT_SOURCE_DIR}/doc/book/Octaspire_LightBoard_Manual.adoc")
