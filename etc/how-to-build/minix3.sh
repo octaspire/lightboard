@@ -13,12 +13,19 @@ cat << EnDoFmEsSaGe
    (i.e. headers) to be installed on the system; otherwise compilation
    will fail. To install development version of library 'SDL2':
 
-       - debian: sudo apt-get install libsdl2-dev
+       - MINIX 3 (by building it manually from source):
+
+         curl -O http://www.libsdl.org/release/SDL2-2.0.5.tar.gz
+         tar zxf SDL2-2.0.5.tar.gz
+         cd SDL2-2.0.5
+         ./configure --disable-audio --disable-joystick --disable-cpuinfo
+         gmake
+         gmake install
 -------------------------------------------------------------------------------
 EnDoFmEsSaGe
 echoToDefs
 read -r BUILDSTR <<'EOF'
-gcc -O2 -std=c99 -Wall -Wextra -DOCTASPIRE_LIGHTBOARD_AMALGAMATED_IMPLEMENTATION octaspire-lightboard-amalgamated.c -o octaspire-lightboard `sdl2-config --cflags --libs` -lm
+clang -O2 -std=c99 -Wall -Wextra -DOCTASPIRE_LIGHTBOARD_AMALGAMATED_IMPLEMENTATION octaspire-lightboard-amalgamated.c -o octaspire-lightboard `sdl2-config --cflags --libs` -lm
 EOF
 echo $BUILDSTR
 eval $BUILDSTR
@@ -29,7 +36,7 @@ printf "\nDone.\n$GREEN"
 echo   "=================================================================="
 echo   "Run the game like this:"
 echo   "=================================================================="
-printf "%b1)%b ./octaspire-lightboard\n" $YELLOW $GREEN
-echo "=================================================================="
+printf "%b1)%b ./octaspire-maze --disable-joystick\n" $YELLOW $GREEN
+echo   "=================================================================="
 echoToDefs
 

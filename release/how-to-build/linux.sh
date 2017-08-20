@@ -18,7 +18,7 @@ cat << EnDoFmEsSaGe
 EnDoFmEsSaGe
 echoToDefs
 read -r BUILDSTR <<'EOF'
-gcc -O2 -std=c99 -Wall -Wextra -DOCTASPIRE_LIGHTBOARD_AMALGAMATED_IMPLEMENTATION octaspire-lightboard-amalgamated.c -o octaspire-lightboard `pkg-config --cflags --libs sdl2` -lm
+gcc -O2 -std=c99 -Wall -Wextra -DOCTASPIRE_LIGHTBOARD_AMALGAMATED_IMPLEMENTATION octaspire-lightboard-amalgamated.c -o octaspire-lightboard `sdl2-config --cflags --libs` -lm
 EOF
 echo $BUILDSTR
 eval $BUILDSTR
