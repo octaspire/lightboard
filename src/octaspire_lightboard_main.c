@@ -208,10 +208,14 @@ void octaspire_lightboard_print_message(
 
 void octaspire_lightboard_print_version(bool const useColors)
 {
+    printf("  ");
+
     octaspire_lightboard_print_message_c_str(
         OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_STR,
         OCTASPIRE_LIGHTBOARD_MESSAGE_INFO,
         useColors);
+
+    printf("\n");
 }
 
 void octaspire_lightboard_print_banner(bool const useColors)
@@ -232,9 +236,9 @@ void octaspire_lightboard_print_banner(bool const useColors)
     }
 
     octaspire_lightboard_print_message_c_str(
-        "Licensed under the Apache License, Version 2.0\n"
-        "Distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES\n"
-        "OR CONDITIONS OF ANY KIND.\n",
+        "  \n"
+        "  Licensed under the Apache License, Version 2.0. Distributed on\n"
+        "  an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.\n",
         OCTASPIRE_LIGHTBOARD_MESSAGE_INFO, useColors);
 
 }

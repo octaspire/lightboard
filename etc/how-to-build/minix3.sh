@@ -36,7 +36,7 @@ printf "\nDone.\n$GREEN"
 echo   "=================================================================="
 echo   "Run the game like this:"
 echo   "=================================================================="
-printf "%b1)%b ./octaspire-lightboard --disable-joystick --software-renderer\n" $YELLOW $GREEN
+printf "%b1)%b ./octaspire-lightboard --software-renderer\n" $YELLOW $GREEN
 echo   "=================================================================="
 echoToDefs
 
