@@ -42,7 +42,7 @@ printf "\nDone.\n$GREEN"
 echo   "=================================================================="
 echo   "Run the game like this:"
 echo   "=================================================================="
-printf "%b1)%b ./octaspire-lightboard -s --disable-joystick\n" $YELLOW $GREEN
+printf "%b1)%b ./octaspire-lightboard -s\n" $YELLOW $GREEN
 echo "=================================================================="
 echoToDefs
 
