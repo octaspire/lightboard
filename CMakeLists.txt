@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.12)
 project(octaspire-lightboard C)
 
 set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MAJOR 0)
-set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR 49)
+set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR 50)
 set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_PATCH 0)
 
 message("== Building ${PROJECT_NAME} ${OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MAJOR}.${OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_MINOR}.${OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_PATCH}")
@@ -136,6 +136,10 @@ add_custom_target(
 add_custom_target(
     new-release-lightboard
     COMMAND "${CMAKE_SOURCE_DIR}/etc/new-release.sh" "${CMAKE_SOURCE_DIR}")
+
+add_custom_target(
+    publish-release-lightboard
+    COMMAND "${CMAKE_SOURCE_DIR}/etc/publish-release.sh" "${CMAKE_SOURCE_DIR}")
 
 if(NOT TARGET octaspire-lightboard-test-runner AND OCTASPIRE_LIGHTBOARD_UNIT_TEST)
     message("== Building of unit tests enabled for ${PROJECT_NAME}")
