@@ -31,7 +31,7 @@ create_new_version() {
     RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
     sed -i "s/set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_PATCH $PATCH)/set(OCTASPIRE_LIGHTBOARD_CONFIG_VERSION_PATCH $NEW_PATCH)/" "$PROJECT_PATH/CMakeLists.txt"
     RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
-    sed -i "s/Documentation for Octaspire Lightboard puzzle game version $MAJOR.$MINOR.$PATCH/Documentation for Octaspire Maze puzzle game version $NEW_MAJOR.$NEW_MINOR.$NEW_PATCH/" "$PROJECT_PATH/doc/book/Octaspire_Lightboard_Manual.adoc"
+    sed -i "s/Documentation for Octaspire Lightboard puzzle game version $MAJOR.$MINOR.$PATCH/Documentation for Octaspire Lightboard puzzle game version $NEW_MAJOR.$NEW_MINOR.$NEW_PATCH/" "$PROJECT_PATH/doc/book/Octaspire_Lightboard_Manual.adoc"
     RETVAL=$?; if [ $RETVAL != 0 ]; then exit $RETVAL; fi
 
     echo "\nRunning make...\n--------------------------\n"

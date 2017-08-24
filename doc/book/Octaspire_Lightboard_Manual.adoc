@@ -5,13 +5,13 @@ Octaspire Lightboard Manual
 :toc:
 :source-highlighter: pygments
 
-Documentation for Octaspire Maze puzzle game version 0.38.0
+Documentation for Octaspire Lightboard puzzle game version 0.50.2
 
 == About
 
 ++++
 <a href="https://travis-ci.org/octaspire/lightboard"><img src="https://travis-ci.org/octaspire/lightboard.svg?branch=master" alt="Build status" /></a>
-<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License badge" /></a>
+<a href="https://choosealicense.com/licenses/apache-2.0/"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License badge" /></a>
 ++++
 
 Octaspire Lightboard is a puzzle game written in *Octaspire Dern* programming language with
