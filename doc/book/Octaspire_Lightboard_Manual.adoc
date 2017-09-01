@@ -5,7 +5,7 @@ Octaspire Lightboard Manual
 :toc:
 :source-highlighter: pygments
 
-Documentation for Octaspire Lightboard puzzle game version 0.52.0
+Documentation for Octaspire Lightboard puzzle game version 0.52.1
 
 == About
 
