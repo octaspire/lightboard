@@ -435,6 +435,7 @@ int main(int argc, char *argv[])
         octaspire_lightboard_api_animation_entity_define,
         5,
         "Create new kind of animation from texture atlas with fixed sprite sizes",
+        false,
         octaspire_dern_vm_get_global_environment(vm)->value.environment))
     {
         abort();

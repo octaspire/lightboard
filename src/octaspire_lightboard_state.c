@@ -815,6 +815,7 @@ octaspire_lightboard_state_t *octaspire_lightboard_state_new(
         octaspire_lightboard_api_shake,
         5,
         "Shake level",
+        false,
         octaspire_dern_vm_get_global_environment(self->vm)->value.environment))
     {
         abort();
@@ -826,6 +827,7 @@ octaspire_lightboard_state_t *octaspire_lightboard_state_new(
         octaspire_lightboard_api_animation_entity_new,
         5,
         "Add new animation to the scene",
+        false,
         octaspire_dern_vm_get_global_environment(self->vm)->value.environment))
     {
         abort();
@@ -837,6 +839,7 @@ octaspire_lightboard_state_t *octaspire_lightboard_state_new(
         octaspire_lightboard_api_animation_entity_get_x,
         5,
         "Get X-coordinate of the named animation",
+        true,
         octaspire_dern_vm_get_global_environment(self->vm)->value.environment))
     {
         abort();
@@ -848,6 +851,7 @@ octaspire_lightboard_state_t *octaspire_lightboard_state_new(
         octaspire_lightboard_api_animation_entity_get_y,
         5,
         "Get Y-coordinate of the named animation",
+        true,
         octaspire_dern_vm_get_global_environment(self->vm)->value.environment))
     {
         abort();
@@ -859,6 +863,7 @@ octaspire_lightboard_state_t *octaspire_lightboard_state_new(
         octaspire_lightboard_api_animation_entity_remove,
         1,
         "Remove animation from the scene",
+        false,
         octaspire_dern_vm_get_global_environment(self->vm)->value.environment))
     {
         abort();
@@ -870,6 +875,7 @@ octaspire_lightboard_state_t *octaspire_lightboard_state_new(
         octaspire_lightboard_api_animation_entity_remove_all,
         5,
         "Remove all animations from the scene",
+        false,
         octaspire_dern_vm_get_global_environment(self->vm)->value.environment))
     {
         abort();
@@ -883,6 +889,7 @@ octaspire_lightboard_state_t *octaspire_lightboard_state_new(
         octaspire_lightboard_api_tween_level_out,
         0,
         "Tween level out",
+        false,
         octaspire_dern_vm_get_global_environment(self->vm)->value.environment))
     {
         abort();
@@ -894,6 +901,7 @@ octaspire_lightboard_state_t *octaspire_lightboard_state_new(
         octaspire_lightboard_api_animation_entity_set_position,
         5,
         "Set new position for an animation on the scene",
+        false,
         octaspire_dern_vm_get_global_environment(self->vm)->value.environment))
     {
         abort();
