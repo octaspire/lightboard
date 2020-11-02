@@ -2,5 +2,9 @@
 
 Game written in programming languages Dern and standard C99.
 
-[https://octaspire.io/lightboard](https://octaspire.io/lightboard)
+**This project is deprecated**. Please use new and improved 3D version of this
+game from inside the Octaspire Dern project. It is written fully in Octaspire Dern.
+This project uses also C99. **After it became possible to write the 3D version
+of this game using only Octaspire Dern - without help from C - this project
+hasn't been updated**.
 
